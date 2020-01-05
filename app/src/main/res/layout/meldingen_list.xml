@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,15 +9,18 @@
 
     <ImageView
         android:id="@+id/list_images"
-        android:padding="10dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:srcCompat="@drawable/ic_14121_warning_icon"
+        tools:srcCompat="@drawable/ic_14121_warning_icon" />
 
     <LinearLayout
-        android:padding="7dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="7dp"
+        android:layout_weight="2">
 
         <TextView
             android:id="@+id/Title"
@@ -31,5 +36,21 @@
             android:textSize="12sp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tijdText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:layout_gravity="right"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/dagTextHidden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone"
+        tools:visibility="gone" />
 
 </LinearLayout>
