@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/meldingenList"
+            android:icon="@drawable/ic_view_list_black_24dp"
+            android:title="Meldingen Lijst" />
+        <item
+            android:id="@+id/meldingenAantal"
+            android:icon="@drawable/ic_show_chart_black_24dp"
+            android:title="Meldingen Aantal" />
+        <item
+            android:id="@+id/logOut"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="Log uit" />
+
+    </group>
+
+</menu>
