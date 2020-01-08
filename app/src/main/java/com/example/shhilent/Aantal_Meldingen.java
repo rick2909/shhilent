@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -34,20 +35,18 @@ public class Aantal_Meldingen extends AppCompatActivity implements NavigationVie
 
         aantalTextView = findViewById(R.id.aantal);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Aantal meldingen");
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
+        menu();
         showAmount();
+        graph();
+    }
 
+    private void showAmount(){
+        DbHandler db = new DbHandler(this);
+        int amount = db.getAmount();
+        aantalTextView.setText("Aantal meldingen vandaag: " + amount);
+    }
+
+    private void graph(){
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, 1),
@@ -65,12 +64,6 @@ public class Aantal_Meldingen extends AppCompatActivity implements NavigationVie
         series.setBackgroundColor(graphBgColor);
 
         graph.addSeries(series);
-    }
-
-    private void showAmount(){
-        DbHandler db = new DbHandler(this);
-        int amount = db.getAmount();
-        aantalTextView.setText("Aaantal meldingen vandaag: " + amount);
     }
 
     public void signOut(){
@@ -105,5 +98,27 @@ public class Aantal_Meldingen extends AppCompatActivity implements NavigationVie
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void menu(){
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Aantal meldingen");
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView navUsername = headerView.findViewById(R.id.username);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null && user.getDisplayName().length() >  0) {
+            navUsername.setText(user.getDisplayName());
+        }
     }
 }
