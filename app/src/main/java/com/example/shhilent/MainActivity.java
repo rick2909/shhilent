@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                             Map<String, Object> userDB = new HashMap<>();
                             userDB.put("messaging_key", deviceToken);
 
-// Add a new document with a generated ID
                             db.collection("users").document(user.getUid())
                                     .update(userDB)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
